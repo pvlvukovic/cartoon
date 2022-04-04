@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "./components/Header.component";
+import AppRouter from "./navigation/AppRouter";
 
 const App: React.FC = () => {
   return (
     <div>
-      <Header />
+      <AppRouter />
     </div>
   );
 };
