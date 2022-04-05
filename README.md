@@ -22,6 +22,7 @@ Your app is ready to be deployed!
 
 ## App Structure
 
+```
 /index.js - minimal express server
 /build - build folder
 /src - source folder
@@ -34,3 +35,4 @@ Your app is ready to be deployed!
 --/utils - utility functions
 --/App.js - main app component
 --/index.js - entry point for the app
+```
