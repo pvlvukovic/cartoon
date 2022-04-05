@@ -17,6 +17,10 @@ const pages = [
     name: "Characters",
     path: "/",
   },
+  {
+    name: "Locations",
+    path: "/locations",
+  },
 ];
 
 function useRouteMatch(patterns: readonly string[]) {

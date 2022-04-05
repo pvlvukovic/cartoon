@@ -56,8 +56,8 @@ const Characters: React.FC = () => {
     }
   }, [isAtBottom, loading, info.next]);
 
+  // Call API when searchParams change
   React.useEffect(() => {
-    // Call API when searchParams change
     const params: CharacterParams = {
       page: page,
       name: searchParams.get("name") || "",
@@ -110,7 +110,7 @@ const Characters: React.FC = () => {
   };
 
   return (
-    <Box p={2}>
+    <Box pt={4}>
       <Grid container spacing={3} mb={2}>
         <Grid item xs={12} sm={6}>
           <Status
