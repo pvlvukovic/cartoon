@@ -15,15 +15,7 @@ import { Link, matchPath, Outlet, useLocation } from "react-router-dom";
 const pages = [
   {
     name: "Characters",
-    path: "/characters",
-  },
-  {
-    name: "Locations",
-    path: "/locations",
-  },
-  {
-    name: "Episodes",
-    path: "/episodes",
+    path: "/",
   },
 ];
 

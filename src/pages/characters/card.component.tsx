@@ -14,7 +14,7 @@ type Props = {
 const CharacterCard: React.FC<Props> = ({ character }: Props) => {
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea href={character.url}>
         <CardMedia
           component="img"
           height="140"
