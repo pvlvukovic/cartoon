@@ -59,7 +59,7 @@ const Header: React.FC = () => {
 
   return (
     <div>
-      <AppBar position="static" color="transparent">
+      <AppBar position="sticky" color="default">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography

@@ -12,6 +12,10 @@ export interface Character {
     name: string;
     url: string;
   };
+  origin: {
+    name: string;
+    url: string;
+  };
   image: string;
   episode: string[];
   url: string;
@@ -25,7 +29,7 @@ export interface CharacterInfo {
 }
 
 export interface CharacterParams {
-  name: string;
-  page: number;
-  status: string;
+  name?: string;
+  status?: string;
+  page?: number;
 }

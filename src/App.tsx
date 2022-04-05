@@ -1,12 +1,8 @@
 import React from "react";
-import AppRouter from "./navigation/AppRouter";
+import AppNavigation from "./navigation/app.navigation";
 
 const App: React.FC = () => {
-  return (
-    <div>
-      <AppRouter />
-    </div>
-  );
+  return <AppNavigation />;
 };
 
 export default App;
