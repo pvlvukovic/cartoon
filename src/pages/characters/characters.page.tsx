@@ -96,7 +96,7 @@ const Characters: React.FC = () => {
         });
         setLoading(false);
       });
-  }, [searchParams, page]);
+  }, [searchParams, page, loading]);
 
   // Show modal when there is a selected character
   React.useEffect(() => {
