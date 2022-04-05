@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Search: React.FC<Props> = ({ onSearch, value }: Props) => {
-  const [search, setSearch] = React.useState<string>("");
+  const [search, setSearch] = React.useState<string>(value);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -31,7 +31,7 @@ const Search: React.FC<Props> = ({ onSearch, value }: Props) => {
     <FormControl fullWidth>
       <Input
         placeholder="Search"
-        value={search || value}
+        value={search}
         onChange={handleSearch}
         onKeyUp={handleKeyUp}
         fullWidth
