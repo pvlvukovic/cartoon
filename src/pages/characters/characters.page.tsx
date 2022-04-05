@@ -9,7 +9,6 @@ import { Info } from "../../interfaces/info.interface";
 import CharacterCard from "./card.component";
 import { characterService } from "../../services/characters.service";
 import Status from "./status.component";
-import CircularProgress from "@mui/material/CircularProgress";
 import Search from "../../components/search.component";
 import { useSearchParams } from "react-router-dom";
 import useScroll from "../../hooks/scroll.hook";
@@ -56,47 +55,46 @@ const Characters: React.FC = () => {
     }
   }, [isAtBottom, loading, info.next]);
 
+  // Fetch characters
+  const fetchCharacters = React.useCallback(async (): Promise<void> => {
+    setLoading(true);
+    setErrorMessage("");
+    try {
+      const params: CharacterParams = {
+        name: searchParams.get("name") || "",
+        status: searchParams.get("status") || "",
+        page,
+      };
+      const data: CharacterInfo = await characterService.getAll(params);
+
+      if (page === 1) {
+        setCharacters(data.results);
+      } else {
+        setCharacters((prev: Character[]) => [...prev, ...data.results]);
+      }
+      setInfo(data.info);
+    } catch (error: any) {
+      if (error?.response?.status === 404) {
+        setErrorMessage("No characters found");
+      } else {
+        setErrorMessage("Something went wrong");
+      }
+
+      setCharacters([]);
+      setInfo({
+        count: 0,
+        pages: 0,
+        next: "",
+        prev: "",
+      });
+    }
+    setLoading(false);
+  }, [searchParams, page]);
+
   // Call API when searchParams change
   React.useEffect(() => {
-    if (loading) {
-      return;
-    }
-
-    const params: CharacterParams = {
-      page: page,
-      name: searchParams.get("name") || "",
-      status: searchParams.get("status") || "",
-    };
-
-    setLoading(true);
-    characterService
-      .getAll(params)
-      .then((response: CharacterInfo) => {
-        if (page === 1) {
-          setCharacters(response.results);
-        } else {
-          setCharacters((prev: Character[]) => [...prev, ...response.results]);
-        }
-        setInfo(response.info);
-        setErrorMessage("");
-        setLoading(false);
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          setErrorMessage("No results found");
-        } else {
-          setErrorMessage("Something went wrong");
-        }
-        setCharacters([]);
-        setInfo({
-          count: 0,
-          pages: 0,
-          next: "",
-          prev: "",
-        });
-        setLoading(false);
-      });
-  }, [searchParams, page, loading]);
+    fetchCharacters();
+  }, [searchParams, page, fetchCharacters]);
 
   // Show modal when there is a selected character
   React.useEffect(() => {
@@ -141,27 +139,32 @@ const Characters: React.FC = () => {
         ))}
       </Grid>
 
-      {!!errorMessage && (
-        <Box m={3} sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        m={3}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {!!errorMessage && (
           <Typography variant="caption" color="textSecondary">
             😞 {errorMessage}
           </Typography>
-        </Box>
-      )}
+        )}
 
-      {!info.next && !errorMessage && characters.length > 0 && (
-        <Box m={3} sx={{ display: "flex", justifyContent: "center" }}>
+        {!info.next && !errorMessage && characters.length > 0 && (
           <Typography variant="caption" color="textSecondary">
             That's all folks! 🎉
           </Typography>
-        </Box>
-      )}
+        )}
 
-      {loading && (
-        <Box m={3} sx={{ display: "flex", justifyContent: "center" }}>
-          <CircularProgress />
-        </Box>
-      )}
+        {loading && (
+          <Typography variant="caption" color="textSecondary">
+            Loading...
+          </Typography>
+        )}
+      </Box>
 
       <CharacterModal
         character={selectedCharacter}
