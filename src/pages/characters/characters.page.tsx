@@ -13,6 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Search from "../../components/search.component";
 import { useSearchParams } from "react-router-dom";
 import useScroll from "../../hooks/scroll.hook";
+import CharacterModal from "./modal.component";
 
 const Characters: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,6 +28,10 @@ const Characters: React.FC = () => {
   const [page, setPage] = React.useState<number>(1);
   const isAtBottom: boolean = useScroll();
   const [errorMessage, setErrorMessage] = React.useState<string>("");
+  const [selectedCharacter, setSelectedCharacter] = React.useState<
+    Character | undefined
+  >(undefined);
+  const [showModal, setShowModal] = React.useState<boolean>(false);
 
   const handleFilterChange = (value: string): void => {
     setPage(1);
@@ -89,6 +94,21 @@ const Characters: React.FC = () => {
       });
   }, [searchParams, page]);
 
+  // Show modal when there is a selected character
+  React.useEffect(() => {
+    if (selectedCharacter) {
+      setShowModal(true);
+    }
+  }, [selectedCharacter]);
+
+  const handleCloseModal = (): void => {
+    setShowModal(false);
+    // Reset selected character after small delay to avoid flickering
+    setTimeout(() => {
+      setSelectedCharacter(undefined);
+    }, 100);
+  };
+
   return (
     <Box p={2}>
       <Grid container spacing={3} mb={2}>
@@ -109,7 +129,10 @@ const Characters: React.FC = () => {
       <Grid container spacing={3}>
         {characters.map((character) => (
           <Grid item xs={6} sm={4} md={3} lg={2} key={character.id}>
-            <CharacterCard character={character} />
+            <CharacterCard
+              onClick={() => setSelectedCharacter(character)}
+              character={character}
+            />
           </Grid>
         ))}
       </Grid>
@@ -135,6 +158,12 @@ const Characters: React.FC = () => {
           <CircularProgress />
         </Box>
       )}
+
+      <CharacterModal
+        character={selectedCharacter}
+        onClose={handleCloseModal}
+        open={showModal}
+      />
     </Box>
   );
 };

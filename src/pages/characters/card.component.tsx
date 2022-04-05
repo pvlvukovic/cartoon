@@ -9,12 +9,13 @@ import { CardActionArea } from "@mui/material";
 
 type Props = {
   character: Character;
+  onClick: (character: Character) => void;
 };
 
-const CharacterCard: React.FC<Props> = ({ character }: Props) => {
+const CharacterCard: React.FC<Props> = ({ character, onClick }: Props) => {
   return (
     <Card>
-      <CardActionArea href={character.url}>
+      <CardActionArea onClick={() => onClick(character)}>
         <CardMedia
           component="img"
           height="140"
