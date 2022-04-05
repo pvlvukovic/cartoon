@@ -58,6 +58,10 @@ const Characters: React.FC = () => {
 
   // Call API when searchParams change
   React.useEffect(() => {
+    if (loading) {
+      return;
+    }
+
     const params: CharacterParams = {
       page: page,
       name: searchParams.get("name") || "",
