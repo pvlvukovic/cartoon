@@ -3,7 +3,7 @@ import {
   Character,
   CharacterInfo,
   CharacterParams,
-} from "../interfaces/characters.interface";
+} from "../interfaces/character";
 
 export const characterService = {
   getAll: async (params: CharacterParams): Promise<CharacterInfo> => {

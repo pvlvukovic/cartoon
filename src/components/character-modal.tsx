@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Character } from "../../interfaces/characters.interface";
+import { Character } from "../interfaces/character";
 import Dialog from "@mui/material/Dialog";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";

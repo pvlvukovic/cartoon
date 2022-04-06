@@ -23,19 +23,11 @@ const pages = [
   },
 ];
 
-function useRouteMatch(patterns: readonly string[]) {
+const useRouteMatch = (patterns: readonly string[]): string | undefined => {
   const { pathname } = useLocation();
 
-  for (let i = 0; i < patterns.length; i += 1) {
-    const pattern = patterns[i];
-    const possibleMatch = matchPath(pattern, pathname);
-    if (possibleMatch !== null) {
-      return possibleMatch;
-    }
-  }
-
-  return null;
-}
+  return patterns.find((pattern) => matchPath(pattern, pathname));
+};
 
 const Header: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -50,8 +42,7 @@ const Header: React.FC = () => {
     setAnchorElNav(null);
   };
 
-  const routeMatch = useRouteMatch(pages.map((page) => page.path));
-  const currentTab = routeMatch?.pattern?.path;
+  const currentTab = useRouteMatch(pages.map((page) => page.path));
 
   return (
     <div>

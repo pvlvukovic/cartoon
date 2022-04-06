@@ -1,9 +1,9 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "../components/header.component";
-import Characters from "../pages/characters/characters.page";
-import NotFoundPage from "../pages/errors/404.page";
-import LocationsPage from "../pages/locations/locations.page";
+import Header from "../components/header";
+import Characters from "../pages/characters/characters";
+import NotFoundPage from "../pages/errors/404";
+import LocationsPage from "../pages/locations/locations";
 
 const AppNavigation: React.FC = () => {
   return (

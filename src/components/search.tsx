@@ -35,6 +35,7 @@ const Search: React.FC<Props> = ({ onSearch, value }: Props) => {
         onChange={handleSearch}
         onKeyUp={handleKeyUp}
         fullWidth
+        autoFocus
       />
     </FormControl>
   );

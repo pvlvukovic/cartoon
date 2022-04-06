@@ -14,8 +14,6 @@ const useScroll = (): boolean => {
     });
   }, []);
 
-  console.log("useScroll", isAtBottom);
-
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);

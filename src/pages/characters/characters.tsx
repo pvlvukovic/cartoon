@@ -4,15 +4,15 @@ import {
   Character,
   CharacterInfo,
   CharacterParams,
-} from "../../interfaces/characters.interface";
-import { Info } from "../../interfaces/info.interface";
-import CharacterCard from "./card.component";
-import { characterService } from "../../services/characters.service";
-import Status from "./status.component";
-import Search from "../../components/search.component";
+} from "../../interfaces/character";
+import { Info } from "../../interfaces/info";
+import CharacterCard from "../../components/character-card";
+import { characterService } from "../../services/characters";
+import Status from "../../components/status-filter";
+import Search from "../../components/search";
 import { useSearchParams } from "react-router-dom";
-import useScroll from "../../hooks/scroll.hook";
-import CharacterModal from "./modal.component";
+import useScroll from "../../hooks/scroll";
+import CharacterModal from "../../components/character-modal";
 
 const Characters: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();

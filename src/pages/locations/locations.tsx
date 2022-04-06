@@ -3,11 +3,11 @@ import {
   Location,
   LocationInfo,
   LocationParams,
-} from "../../interfaces/locations.interface";
+} from "../../interfaces/locations";
 import { useSearchParams } from "react-router-dom";
-import { Info } from "../../interfaces/info.interface";
-import { locationService } from "../../services/locations.service";
-import { characterService } from "../../services/characters.service";
+import { Info } from "../../interfaces/info";
+import { locationService } from "../../services/locations";
+import { characterService } from "../../services/characters";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -23,10 +23,10 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Grid } from "@mui/material";
+import { Grid, Tooltip } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Search from "../../components/search.component";
-import { Character } from "../../interfaces/characters.interface";
+import Search from "../../components/search";
+import { Character } from "../../interfaces/character";
 
 const LocationsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,7 +41,6 @@ const LocationsPage: React.FC = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [loadingResidents, setLoadingResidents] =
     React.useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = React.useState<string>("");
   const [selectedLocation, setSelectedLocation] = React.useState<
     Location | undefined
   >(undefined);
@@ -49,7 +48,7 @@ const LocationsPage: React.FC = () => {
   const handleSearch = (value: string): void => {
     setSearchParams({
       name: value,
-      page: searchParams.get("page") || "1",
+      page: "1",
     });
   };
 
@@ -61,15 +60,14 @@ const LocationsPage: React.FC = () => {
     };
 
     setLoading(true);
-    setErrorMessage("");
     locationService
       .getAll(params)
       .then((response: LocationInfo) => {
         setLocations(response.results);
         setInfo(response.info);
       })
-      .catch((error) => {
-        setErrorMessage(error.message);
+      .catch(() => {
+        // TODO handle error
       })
       .finally(() => {
         setLoading(false);
@@ -93,7 +91,7 @@ const LocationsPage: React.FC = () => {
             setCharacters(response);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           // TODO: Handle error
         })
         .finally(() => {
@@ -103,7 +101,13 @@ const LocationsPage: React.FC = () => {
   }, [selectedLocation]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" m={4}>
+        <Typography variant="caption" color="textSecondary">
+          Loading...
+        </Typography>
+      </Box>
+    );
   }
 
   return (
@@ -173,7 +177,19 @@ const LocationsPage: React.FC = () => {
                   </TableCell>
                   <TableCell align="right">
                     <Typography variant="body1">
-                      <a href={location.url}>Visit</a>
+                      <a
+                        target="_blank"
+                        href={`https://www.google.com/maps/search/?api=1&query=${
+                          // random latitude
+                          Math.random() * (90 - -90) + -90
+                        },${
+                          // random longitude
+                          Math.random() * (180 - -180) + -180
+                        }`}
+                        rel="noreferrer"
+                      >
+                        Visit
+                      </a>
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -212,7 +228,9 @@ const LocationsPage: React.FC = () => {
                         >
                           {characters.map((character: Character) => (
                             <Box key={character.id}>
-                              <Avatar src={character.image} />
+                              <Tooltip title={character.name}>
+                                <Avatar src={character.image} />
+                              </Tooltip>
                             </Box>
                           ))}
                         </Box>
@@ -239,9 +257,7 @@ const LocationsPage: React.FC = () => {
                     page: (page + 1).toString(),
                   });
                 }}
-                onRowsPerPageChange={(
-                  event: React.ChangeEvent<HTMLInputElement>
-                ) => {
+                onRowsPerPageChange={() => {
                   setSearchParams({
                     name: searchParams.get("name") || "",
                     page: "1",

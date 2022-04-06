@@ -1,6 +1,6 @@
 // Character interface
 
-import { Info } from "./info.interface";
+import { Info } from "./info";
 
 export interface Character {
   id: number;

@@ -1,6 +1,6 @@
 // Location interface
 
-import { Info } from "./info.interface";
+import { Info } from "./info";
 
 export interface Location {
   id: number;
