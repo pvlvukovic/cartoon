@@ -46,10 +46,15 @@ const LocationsPage: React.FC = () => {
   >(undefined);
 
   const handleSearch = (value: string): void => {
-    setSearchParams({
-      name: value,
-      page: "1",
-    });
+    if (value) {
+      searchParams.set("name", value);
+    } else {
+      searchParams.delete("name");
+    }
+
+    searchParams.set("page", "1");
+
+    setSearchParams(searchParams);
   };
 
   // Call API when searchParams change

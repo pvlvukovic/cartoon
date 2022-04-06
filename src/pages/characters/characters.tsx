@@ -34,18 +34,26 @@ const Characters: React.FC = () => {
 
   const handleFilterChange = (value: string): void => {
     setPage(1);
-    setSearchParams({
-      name: searchParams.get("name") || "",
-      status: value,
-    });
+
+    if (value) {
+      searchParams.set("status", value);
+    } else {
+      searchParams.delete("status");
+    }
+
+    setSearchParams(searchParams);
   };
 
   const handleSearch = (value: string): void => {
     setPage(1);
-    setSearchParams({
-      name: value,
-      status: searchParams.get("status") || "",
-    });
+
+    if (value) {
+      searchParams.set("name", value);
+    } else {
+      searchParams.delete("name");
+    }
+
+    setSearchParams(searchParams);
   };
 
   // Detect scroll to bottom
