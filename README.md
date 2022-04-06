@@ -12,7 +12,7 @@ Runs the app in production mode. Starts express server and serves the app.
 
 Runs the app in development mode. Starts react-dev-server and watches for changes.
 
-### `npm run build-client`
+### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
