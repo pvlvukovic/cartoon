@@ -14,7 +14,7 @@ import {
 import * as React from "react";
 import { Link, matchPath, Outlet, useLocation } from "react-router-dom";
 
-const pages = [
+export const pages = [
   {
     name: "Characters",
     path: "/",
@@ -91,6 +91,7 @@ const Header: React.FC = () => {
               >
                 {pages.map((page) => (
                   <MenuItem
+                    role="link"
                     key={page.name}
                     component={Link}
                     to={page.path}
@@ -126,6 +127,7 @@ const Header: React.FC = () => {
               >
                 {pages.map((page) => (
                   <Tab
+                    role="link"
                     key={page.name}
                     label={page.name}
                     component={Link}
