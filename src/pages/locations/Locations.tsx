@@ -23,8 +23,8 @@ import {
 import * as React from "react";
 import { useSearchParams } from "react-router-dom";
 import Search from "../../components/Search";
-import { ICharacter } from "../../interfaces/character";
-import { IInfo } from "../../interfaces/info";
+import { ICharacter } from "../../interfaces/Character";
+import { IInfo } from "../../interfaces/Info";
 import {
   ILocation,
   ILocationInfo,

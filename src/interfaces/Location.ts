@@ -1,6 +1,6 @@
 // Location interface
 
-import { IInfo } from "./info";
+import { IInfo } from "./Info";
 
 export interface ILocation {
   id: number;
