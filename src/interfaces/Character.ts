@@ -1,8 +1,8 @@
 // Character interface
 
-import { Info } from "./info";
+import { IInfo } from "./info";
 
-export interface Character {
+export interface ICharacter {
   id: number;
   name: string;
   status: string;
@@ -23,12 +23,12 @@ export interface Character {
   gender: string;
 }
 
-export interface CharacterInfo {
-  results: Character[];
-  info: Info;
+export interface ICharacterInfo {
+  results: ICharacter[];
+  info: IInfo;
 }
 
-export interface CharacterParams {
+export interface ICharacterParams {
   name?: string;
   status?: string;
   page?: number;

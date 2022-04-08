@@ -1,5 +1,5 @@
 import React from "react";
-import AppNavigation from "./navigation/app-navigation";
+import AppNavigation from "./navigation/AppNavigation";
 
 const App: React.FC = () => {
   return <AppNavigation />;

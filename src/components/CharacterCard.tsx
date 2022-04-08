@@ -1,15 +1,17 @@
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 import * as React from "react";
-import { Character } from "../interfaces/character";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import { CardActionArea } from "@mui/material";
+import { ICharacter } from "../interfaces/character";
 
 type Props = {
-  character: Character;
-  onClick: (character: Character) => void;
+  character: ICharacter;
+  onClick: (character: ICharacter) => void;
 };
 
 const CharacterCard: React.FC<Props> = ({ character, onClick }: Props) => {

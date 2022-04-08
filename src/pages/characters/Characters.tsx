@@ -1,23 +1,23 @@
 import { Box, Grid, Typography } from "@mui/material";
 import * as React from "react";
-import {
-  Character,
-  CharacterInfo,
-  CharacterParams,
-} from "../../interfaces/character";
-import { Info } from "../../interfaces/info";
-import CharacterCard from "../../components/character-card";
-import { characterService } from "../../services/characters";
-import Status from "../../components/status-filter";
-import Search from "../../components/search";
 import { useSearchParams } from "react-router-dom";
+import CharacterCard from "../../components/CharacterCard";
+import CharacterModal from "../../components/CharacterModal";
+import Search from "../../components/Search";
+import Status from "../../components/StatusFilter";
 import useScroll from "../../hooks/scroll";
-import CharacterModal from "../../components/character-modal";
+import {
+  ICharacter,
+  ICharacterInfo,
+  ICharacterParams,
+} from "../../interfaces/Character";
+import { IInfo } from "../../interfaces/Info";
+import { characterService } from "../../services/characters";
 
 const Characters: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [characters, setCharacters] = React.useState<Character[]>([]);
-  const [info, setInfo] = React.useState<Info>({
+  const [characters, setCharacters] = React.useState<ICharacter[]>([]);
+  const [info, setInfo] = React.useState<IInfo>({
     count: 0,
     pages: 0,
     next: "",
@@ -28,7 +28,7 @@ const Characters: React.FC = () => {
   const isAtBottom: boolean = useScroll();
   const [errorMessage, setErrorMessage] = React.useState<string>("");
   const [selectedCharacter, setSelectedCharacter] = React.useState<
-    Character | undefined
+    ICharacter | undefined
   >(undefined);
   const [showModal, setShowModal] = React.useState<boolean>(false);
 
@@ -68,17 +68,17 @@ const Characters: React.FC = () => {
     setLoading(true);
     setErrorMessage("");
     try {
-      const params: CharacterParams = {
+      const params: ICharacterParams = {
         name: searchParams.get("name") || "",
         status: searchParams.get("status") || "",
         page,
       };
-      const data: CharacterInfo = await characterService.getAll(params);
+      const data: ICharacterInfo = await characterService.getAll(params);
 
       if (page === 1) {
         setCharacters(data.results);
       } else {
-        setCharacters((prev: Character[]) => [...prev, ...data.results]);
+        setCharacters((prev: ICharacter[]) => [...prev, ...data.results]);
       }
       setInfo(data.info);
     } catch (error: any) {

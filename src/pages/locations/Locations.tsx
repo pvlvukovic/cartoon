@@ -1,38 +1,43 @@
-import * as React from "react";
 import {
-  Location,
-  LocationInfo,
-  LocationParams,
-} from "../../interfaces/locations";
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  KeyboardArrowUp as KeyboardArrowUpIcon,
+} from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Collapse,
+  Grid,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import * as React from "react";
 import { useSearchParams } from "react-router-dom";
-import { Info } from "../../interfaces/info";
-import { locationService } from "../../services/locations";
+import Search from "../../components/Search";
+import { ICharacter } from "../../interfaces/character";
+import { IInfo } from "../../interfaces/info";
+import {
+  ILocation,
+  ILocationInfo,
+  ILocationParams,
+} from "../../interfaces/Location";
 import { characterService } from "../../services/characters";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TablePagination from "@mui/material/TablePagination";
-import TableFooter from "@mui/material/TableFooter";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Grid, Tooltip } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Search from "../../components/search";
-import { Character } from "../../interfaces/character";
+import { locationService } from "../../services/locations";
 
 const LocationsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [locations, setLocations] = React.useState<Location[]>([]);
-  const [characters, setCharacters] = React.useState<Character[]>([]);
-  const [info, setInfo] = React.useState<Info>({
+  const [locations, setLocations] = React.useState<ILocation[]>([]);
+  const [characters, setCharacters] = React.useState<ICharacter[]>([]);
+  const [info, setInfo] = React.useState<IInfo>({
     count: 0,
     pages: 0,
     next: "",
@@ -42,7 +47,7 @@ const LocationsPage: React.FC = () => {
   const [loadingResidents, setLoadingResidents] =
     React.useState<boolean>(false);
   const [selectedLocation, setSelectedLocation] = React.useState<
-    Location | undefined
+    ILocation | undefined
   >(undefined);
 
   const handleSearch = (value: string): void => {
@@ -59,7 +64,7 @@ const LocationsPage: React.FC = () => {
 
   // Call API when searchParams change
   React.useEffect(() => {
-    const params: LocationParams = {
+    const params: ILocationParams = {
       name: searchParams.get("name") || "",
       page: searchParams.get("page") || "1",
     };
@@ -67,7 +72,7 @@ const LocationsPage: React.FC = () => {
     setLoading(true);
     locationService
       .getAll(params)
-      .then((response: LocationInfo) => {
+      .then((response: ILocationInfo) => {
         setLocations(response.results);
         setInfo(response.info);
       })
@@ -91,7 +96,7 @@ const LocationsPage: React.FC = () => {
 
       characterService
         .getMultiple(ids)
-        .then((response: Character[]) => {
+        .then((response: ICharacter[]) => {
           if (response.length > 0) {
             setCharacters(response);
           }
@@ -142,7 +147,7 @@ const LocationsPage: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {locations.map((location: Location) => (
+            {locations.map((location: ILocation) => (
               <React.Fragment>
                 <TableRow
                   key={location.id}
@@ -231,7 +236,7 @@ const LocationsPage: React.FC = () => {
                             },
                           }}
                         >
-                          {characters.map((character: Character) => (
+                          {characters.map((character: ICharacter) => (
                             <Box key={character.id}>
                               <Tooltip title={character.name}>
                                 <Avatar src={character.image} />

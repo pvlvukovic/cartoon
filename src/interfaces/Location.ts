@@ -1,8 +1,8 @@
 // Location interface
 
-import { Info } from "./info";
+import { IInfo } from "./info";
 
-export interface Location {
+export interface ILocation {
   id: number;
   name: string;
   type: string;
@@ -12,12 +12,12 @@ export interface Location {
   created: string;
 }
 
-export interface LocationInfo {
-  results: Location[];
-  info: Info;
+export interface ILocationInfo {
+  results: ILocation[];
+  info: IInfo;
 }
 
-export interface LocationParams {
+export interface ILocationParams {
   name?: string;
   page?: string;
 }

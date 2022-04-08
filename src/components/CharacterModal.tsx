@@ -1,14 +1,10 @@
-import * as React from "react";
-import { Character } from "../interfaces/character";
-import Dialog from "@mui/material/Dialog";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import { CloseOutlined } from "@mui/icons-material";
+import { Avatar, Box, Dialog, IconButton, Typography } from "@mui/material";
+import * as React from "react";
+import { ICharacter } from "../interfaces/character";
 
 type Props = {
-  character?: Character;
+  character?: ICharacter;
   onClose: () => void;
   open: boolean;
 };

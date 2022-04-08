@@ -1,6 +1,6 @@
 // Pagination info interface
 
-export interface Info {
+export interface IInfo {
   count: number;
   pages: number;
   next: string;
