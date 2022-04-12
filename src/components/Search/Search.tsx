@@ -16,7 +16,7 @@ const Search: React.FC<Props> = ({ onSearch, value }: Props) => {
     setSearch(event.target.value);
   };
 
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = () => {
     // Clear the timeout if it has already been set.
     clearTimeout(typingTimer);
 

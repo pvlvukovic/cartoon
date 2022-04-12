@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import * as React from "react";
-import { ICharacter } from "../interfaces/Character";
+import { ICharacter } from "../../interfaces/Character";
 
 type Props = {
   character: ICharacter;

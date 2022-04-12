@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import { useSearchParams } from "react-router-dom";
-import Search from "../../components/Search";
+import Search from "../../components/Search/Search";
 import { ICharacter } from "../../interfaces/Character";
 import { IInfo } from "../../interfaces/Info";
 import {

@@ -2,7 +2,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import CharacterCard from "./CharacterCard";
-import { ICharacter } from "../interfaces/Character";
+import { ICharacter } from "../../interfaces/Character";
 
 // Mock data
 const character: ICharacter = {

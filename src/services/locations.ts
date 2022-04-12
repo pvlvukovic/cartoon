@@ -1,5 +1,5 @@
 import { ILocationInfo, ILocationParams } from "../interfaces/Location";
-import httpClient from "../utils/http";
+import httpClient from "../utils/axiosInstance";
 
 export const locationService = {
   getAll: async (params: ILocationParams): Promise<ILocationInfo> => {

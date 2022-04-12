@@ -3,7 +3,7 @@ import {
   ICharacterInfo,
   ICharacterParams,
 } from "../interfaces/Character";
-import httpClient from "../utils/http";
+import httpClient from "../utils/axiosInstance";
 
 export const characterService = {
   getAll: async (params: ICharacterParams): Promise<ICharacterInfo> => {

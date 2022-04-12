@@ -1,11 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
 import * as React from "react";
 import { useSearchParams } from "react-router-dom";
-import CharacterCard from "../../components/CharacterCard";
-import CharacterModal from "../../components/CharacterModal";
-import Search from "../../components/Search";
-import Status from "../../components/StatusFilter";
-import useScroll from "../../hooks/scroll";
+import CharacterCard from "../../components/CharacterCard/CharacterCard";
+import CharacterModal from "../../components/CharacterModal/CharacterModal";
+import Search from "../../components/Search/Search";
+import Status from "../../components/StatusFilter/StatusFilter";
+import useScroll from "../../hooks/useScroll";
 import {
   ICharacter,
   ICharacterInfo,
